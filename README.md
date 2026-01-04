@@ -2,6 +2,8 @@ Primer intento de realizar un proyecto FullStack: reaprendiendo HTML CSS y Javas
 
 Este proyecto lo iré actualizando continuamente hasta acabarlo
 03/01/2026: 
+
+
         - Hasta ahora solamente tengo un Login funcional y un inicio para administradores para el CRUD de usuarios.
         - Frontend:  HTML, CSS básico y JavaScript para la conexión entre el back y el front
         - Integración de Spring Security y desglosamiento del SecurityFilterChain en 3 partes para mejor acoplamiento y recomendación misma de la documentación.
