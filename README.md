@@ -1,4 +1,4 @@
-Primer intento de realizar un proyecto FullStack: reaprendiendo HTML CSS y Javascript y aplicando mi conocimiento en Backend con Java Springboot. JavaScript como agente para la conexión Side-client con el Backend
+Primer intento de realizar un proyecto FullStack con Spring Security: reaprendiendo HTML CSS y Javascript y aplicando mi conocimiento en Backend con Java Springboot. JavaScript como agente para la conexión Side-client con el Backend.
 
 Este proyecto lo iré actualizando continuamente hasta acabarlo...
 
