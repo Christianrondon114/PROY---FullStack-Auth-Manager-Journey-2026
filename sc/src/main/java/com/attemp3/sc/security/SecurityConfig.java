@@ -22,6 +22,11 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.*;
+import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.ExceptionTranslationFilter;
@@ -29,6 +34,9 @@ import org.springframework.security.web.context.SecurityContextHolderFilter;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.NullRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 @EnableWebSecurity
@@ -40,6 +48,7 @@ public class SecurityConfig {
         this.securityService = securityService;
     }
 
+    // BASIC RESOURCES FILTER CHAIN
     @Bean
     @Order(1)
     public SecurityFilterChain resourcesFilterChain(HttpSecurity http) throws Exception {
@@ -55,6 +64,7 @@ public class SecurityConfig {
                 .build();
     }
 
+    // API SECURITY FILTER CHAIN
     @Bean
     @Order(2)
     public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
@@ -98,9 +108,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.ERROR).permitAll()
                         .requestMatchers("/html/myLogin.html", "/favicon.ico").permitAll()
-                        .requestMatchers("/css/**", "/js/**", "/html/navbar.html").permitAll()
-                        .requestMatchers("/html/myLogin.html").permitAll()
-                        .requestMatchers("/html/administrador/home_admin.html","/html/administrador/usuarios.html").hasRole("ADMIN")
+                        .requestMatchers("/html/administrador/home_admin.html","/html/administrador/usuarios.html").hasAnyRole("ADMIN","MOD")
                         .anyRequest().authenticated()
                 )
                 .logout(logout -> logout.logoutSuccessUrl("/html/myLogin.html"))
@@ -109,7 +117,6 @@ public class SecurityConfig {
     }
 
     // CUSTOM FILTER: DebugExceptionFilter.java
-
     @Bean
     public DebugExceptionFilter debugExceptionFilter() {
         return new DebugExceptionFilter();
@@ -162,15 +169,37 @@ public class SecurityConfig {
         return new GrantedAuthorityDefaults("ROLE_");
     }
 
-    // CUSTOM USER DETAILS WITH AUTORITHIES PASSWORD ETC
+    // CREATING BEAN PASSWORD ENCODER FOR ENCRYPT USER'S PASSWORDS.
+    /*
+        Explicación en Español: Esta personalización sirve para si un futuro se migre el
+        sistema a uno más grande y/o se quiera cambiar la encryptación por Default, solo
+        tengo que cambiar el nombre principal del encrypt para que se registren las nuevas
+        contraseñas con la nueva encriptación. No tengo que reiniciar contraseñas ni nada.
+     */
+
     @Bean
-    public UserDetailsService userDetailsService() {
-        var user = User.withUsername("admin")
-                .password("{noop}123")
-                .authorities("ROLE_ADMIN", "delete", "write","read","create")
-                .build();
-        return new InMemoryUserDetailsManager(user);
+    public PasswordEncoder passwordEncoder(){
+        String idForEncode = "bcrypt";
+        Map<String, PasswordEncoder> encoders = new HashMap<>();
+
+        encoders.put(idForEncode, new BCryptPasswordEncoder());
+        encoders.put("noop", NoOpPasswordEncoder.getInstance());
+        encoders.put("pbkdf2", Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_5());
+        encoders.put("pbkdf2@SpringSecurity_v5_8", Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8());
+        encoders.put("scrypt", SCryptPasswordEncoder.defaultsForSpringSecurity_v4_1());
+        encoders.put("scrypt@SpringSecurity_v5_8", SCryptPasswordEncoder.defaultsForSpringSecurity_v5_8());
+        encoders.put("argon2", Argon2PasswordEncoder.defaultsForSpringSecurity_v5_2());
+        encoders.put("argon2@SpringSecurity_v5_8", Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8());
+        encoders.put("sha256", new StandardPasswordEncoder());
+
+         return new DelegatingPasswordEncoder(idForEncode, encoders);
     }
+
+    @Bean
+    CustomUserDetailsService customUserDetailsService() {
+        return new CustomUserDetailsService();
+    }
+
 
     /* -------  FIRST SECURITY FILTER CHAIN -------
     @Bean
@@ -233,6 +262,16 @@ public class SecurityConfig {
         return http.build();
     }
 
-     */
+    -------- USER IN MEMORY CONFIG -------
 
+    // CUSTOM USER DETAILS WITH AUTORITHIES PASSWORD ETC
+    @Bean
+    public UserDetailsService userDetailsService() {
+        var user = User.withUsername("admin")
+                .password("{noop}123")
+                .authorities("ROLE_ADMIN", "delete", "write","read","create")
+                .build();
+        return new InMemoryUserDetailsManager(user);
+    }
+     */
 }

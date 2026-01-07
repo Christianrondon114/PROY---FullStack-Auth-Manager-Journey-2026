@@ -17,7 +17,7 @@ public class SecurityService {
     public boolean canRead(Authentication auth){
         var authorities = roleHierarchy.getReachableGrantedAuthorities(auth.getAuthorities());
 
-        return authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))
+        return authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_MOD"))
                 && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("read"));
     }
 

@@ -11,6 +11,7 @@ import com.attemp3.sc.entities.User;
 import com.attemp3.sc.mapper.UserMapper;
 import com.attemp3.sc.repository.RoleRepository;
 import com.attemp3.sc.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,16 +21,20 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
 
     public UserService(
             UserRepository userRepository,
-            RoleRepository roleRepository) {
+            RoleRepository roleRepository,
+            PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
+
     }
 
-    // READ
+    // READ ALL USERS
     public List<ListAllUsersResponse> showAllUsers() {
         List<User> userList = userRepository.findAll();
         return userList.stream()
@@ -48,6 +53,13 @@ public class UserService {
 
         user.setRole(role);
 
+        if (!request.getPassword().trim().isEmpty()) {
+            String encodedPassword = passwordEncoder.encode(request.getPassword());
+            user.setPassword(encodedPassword);
+        } else {
+            throw new RuntimeException("empty password");
+        }
+
         User savedUser = userRepository.save(user);
 
         return UserMapper.toCreateUserResponse(savedUser);
@@ -62,6 +74,7 @@ public class UserService {
     }
 
 
+    // UPDATE
     public UserResponse updateUser(Long id, UpdateUserRequest request) {
         User userFound = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not founded"));
@@ -72,14 +85,16 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("Role not found"));
         userFound.setRole(role);
 
-        if (!request.getPassword().trim().isEmpty()) {
-            userFound.setPassword(request.getPassword());
+        if (request.getPassword() != null && !request.getPassword().trim().isEmpty()) {
+            String encodedPassword = passwordEncoder.encode(request.getPassword());
+            userFound.setPassword(encodedPassword);
         }
 
         User updatedUser = userRepository.save(userFound);
         return UserMapper.toUserResponse(updatedUser);
     }
 
+    // READ ONE USER
     public ReadOneUserResponse readUserById(Long id) {
         User userFound = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
