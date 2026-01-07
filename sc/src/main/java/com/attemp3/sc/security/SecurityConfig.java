@@ -48,7 +48,7 @@ public class SecurityConfig {
         RequestCache nullRequestCache = new NullRequestCache();
 
         return http
-                .securityMatcher("/css/**", "/js/**","html/navbar.html")
+                .securityMatcher("/css/**", "/js/**","/html/navbar.html")
                 .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
                 .requestCache(cache -> cache
                         .requestCache(nullRequestCache))
@@ -98,9 +98,12 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.ERROR).permitAll()
                         .requestMatchers("/html/myLogin.html", "/favicon.ico").permitAll()
+                        .requestMatchers("/css/**", "/js/**", "/html/navbar.html").permitAll()
+                        .requestMatchers("/html/myLogin.html").permitAll()
                         .requestMatchers("/html/administrador/home_admin.html","/html/administrador/usuarios.html").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
+                .logout(logout -> logout.logoutSuccessUrl("/html/myLogin.html"))
 
                 .build();
     }
