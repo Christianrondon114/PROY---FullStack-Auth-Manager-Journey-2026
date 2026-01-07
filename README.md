@@ -2,6 +2,17 @@ Primer intento de realizar un proyecto FullStack: reaprendiendo HTML CSS y Javas
 
 Este proyecto lo iré actualizando continuamente hasta acabarlo
 
+        06/01/2026: 
+        - Implementación del Logout
+        - He leído e integrado: 
+                1) Servlet Authentication Architecture: https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html
+                2) Username/Password Authentication: https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/index.html
+                3) UserDetailsService: https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/user-details-service.html
+                4) Spring Security Features Authentication Password Storage: https://docs.spring.io/spring-security/reference/features/authentication/password-storage.html#authentication-password-storage-configuration
+        - Ahora toca:
+                1) Parte técnica: implementar usuarios reales con UserDetailsService
+                2) Parte técnica: Encriptar contraseñas de los usuarios con BCrypt
+        
 
         03/01/2026: 
         - Hasta ahora solamente tengo un Login funcional y un inicio para administradores para el CRUD de usuarios.
@@ -14,3 +25,5 @@ Este proyecto lo iré actualizando continuamente hasta acabarlo
         - Ahora toca leer: 
                 1) Servlet Authentication Architecture: https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html
                 2) Username/Password Authentication: https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/index.html
+
+       
