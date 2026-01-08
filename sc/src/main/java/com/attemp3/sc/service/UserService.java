@@ -49,7 +49,7 @@ public class UserService {
         user.setPassword(user.getPassword());
 
         Role role = roleRepository.findById(request.getIdRole())
-                .orElseThrow(() -> new RuntimeException("Error: El rol con ID " + request.getIdRole() + " no existe."));
+                .orElseThrow(() -> new RuntimeException("Error: role w ID " + request.getIdRole() + " doesn't exists."));
 
         user.setRole(role);
 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<section class="container">
+    <div class="login-container">
+        <div class="circle circle-one"></div>
+        <div class="circle circle-two"></div>
+
+        <div class="form-container">
+            <div class="register-forget">
+                <h1 style="margin: 0; font-size: 1.8rem;">Register</h1>
+            </div>
+            <p class="opacity">¡Register y explore my system! =D</p>
+
+            <form>
+                <input type="text" id = "username" placeholder="Username" required>
+                <input type="password" id = "password" placeholder="Password" required>
+                <input type="password" id= "passwordRepeat" placeholder="Repeat Password" required>
+                <button type="submit" onclick = "register()">Submit</button>
+            </form>
+
+            <div class="register-forget">
+                <span class="opacity">¿Already register?</span>
+                <a href="/html/myLogin.html"><b>Log in</b></a>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+<script src="/js/public/register.js"></script>
+</html>

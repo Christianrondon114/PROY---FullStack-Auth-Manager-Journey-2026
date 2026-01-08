@@ -61,14 +61,10 @@ async function createUser() {
     });
 
     if(response.ok) {
-
-
         const modalElement = document.getElementById('createUserModal');
         const modal = bootstrap.Modal.getInstance(modalElement);
         modal.hide();
-
         document.getElementById('createUserForm').reset();
-
         loadUsers();
     }
 }

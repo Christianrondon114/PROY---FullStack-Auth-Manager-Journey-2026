@@ -57,7 +57,7 @@ public class SecurityConfig {
         RequestCache nullRequestCache = new NullRequestCache();
 
         return http
-                .securityMatcher("/css/**", "/js/**","/html/navbar.html")
+                .securityMatcher("/css/**", "/js/**","/html/navbar.html","/html/public/**")
                 .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
                 .requestCache(cache -> cache
                         .requestCache(nullRequestCache))
@@ -70,9 +70,13 @@ public class SecurityConfig {
     public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
         return http
                 .securityMatcher("/api/**")
+
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.ERROR).permitAll()
+
+                        .requestMatchers("/api/register").permitAll()
+
                         .requestMatchers(HttpMethod.GET, "/api/users/**")
                         .access((Authentication, context) ->
                                 new AuthorizationDecision(securityService.canRead(Authentication.get())))
@@ -112,7 +116,6 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .logout(logout -> logout.logoutSuccessUrl("/html/myLogin.html"))
-
                 .build();
     }
 
