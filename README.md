@@ -2,6 +2,21 @@ Primer intento de realizar un proyecto FullStack con Spring Security: reaprendie
 
 Este proyecto lo iré actualizando continuamente hasta acabarlo...
 
+        08/01/2026:
+        - Hoy día he integrado la creación de interfaz de registro de usuarios, la lógica de negocio del 
+        register habilitado a todos los usuarios sin importar su authentication además de que los nuevos
+        usuarios se reflejan en el CRUD de administradores y en la base de datos MySQL.
+        - He leído e integrado:
+                1) No he leído ni integrado nada nuevo, ya tengo entendido el flujo front -> backend con 
+                JavaScript, la lógica de negocio del Registro de usuarios lo logré con conocimiento apren-
+                dido hasta ahora
+        - Ahora toca hacer:
+                1) Parte técnica: creación y adaptación de la Entidad Authorities en la base de datos para 
+                el sistema
+                2) Parte técnica: creación de la recuperación de contraseña.
+                3) Parte teórica: Password Storage (terminar de leer recuperación de contraseña): https:
+                //docs.spring.io/spring-security/reference/features/authentication/password-storage.html
+        
         07/01/2026:
         - Hasta el momento este proyecto se va tornando a la authentication y authorization, no muy alejado
         a un microservicio, pero como aún no sé del tema, se hará un monolito.
