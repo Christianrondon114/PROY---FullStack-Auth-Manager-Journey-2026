@@ -2,6 +2,20 @@ Primer intento de realizar un proyecto FullStack con Spring Security: reaprendie
 
 Este proyecto lo iré actualizando continuamente hasta acabarlo...
 
+        11/01/2026:
+        - Ya terminado la autorización y autenticación (de manera no refinada) por fin he decidido la di-
+        rección de este proyecto, ya que el Spring Security está implementado de manera básica, intentaré
+        implementar una tienda virtual con carritos, users, roles, itemcarts, products.
+        - Integrado:
+                1) Creación del model -> repository -> service -> controller del Product.
+                2) Listar productos, crear productos y eliminar productos guiandome con mis anteriores
+                proyectos
+        - Toca hacer:
+                1) backend: Completar CRUD
+                2) front: implementar las interfaces en el panel de administrador (crud productos)
+                3) conexión backend -> frontend
+
+                
         08/01/2026:
         - Hoy día he integrado la creación de interfaz de registro de usuarios, la lógica de negocio del 
         register habilitado a todos los usuarios sin importar su authentication además de que los nuevos
