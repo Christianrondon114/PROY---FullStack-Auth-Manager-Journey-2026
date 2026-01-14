@@ -8,6 +8,7 @@ import com.attemp3.sc.dtos.user.response.ReadOneUserResponse;
 import com.attemp3.sc.dtos.user.response.UserResponse;
 import com.attemp3.sc.service.UserService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,6 +36,7 @@ public class UserController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public CreateUserResponse createUser(@RequestBody @Valid CreateUserRequest request) {
         return userService.createUser(request);
     }
