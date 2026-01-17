@@ -2,6 +2,12 @@ Primer intento de realizar un proyecto FullStack con Spring Security: reaprendie
 
 Este proyecto lo iré actualizando continuamente hasta acabarlo...
 
+        16/01/2026:
+        - Sigo leyendo documentación oficial de Spring MVC, ya comprendiendo ResponseEntity y Controller
+        Advice para el control de Exceptiones globales. A la par aprendiendo Typescript para luego inte-
+        grarlo en un futuro con Angular
+
+        
         13/01/2026:
         - Estos días he estado leyendo documentación oficial de Spring MVC ya que decidí mejorar mi forma
         de hacer controllers
