@@ -6,6 +6,11 @@ Este proyecto lo iré actualizando continuamente hasta acabarlo...
         - Sigo leyendo documentación oficial de Spring MVC, ya comprendiendo ResponseEntity y Controller
         Advice para el control de Exceptiones globales. A la par aprendiendo Typescript para luego inte-
         grarlo en un futuro con Angular
+        - No he estado avanzando código porque la teoría es más importante, cuando llegue el momento de 
+        hacer código de nuevo tendré como tarea:
+                1) Manejo de Excepciones
+                2) Mejorar Controllers y Services con ResponseEntity
+                3) Creación del carrito y la lógica del negocio correspondiente
 
         
         13/01/2026:
