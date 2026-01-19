@@ -2,6 +2,29 @@ Primer intento de realizar un proyecto FullStack con Spring Security: reaprendie
 
 Este proyecto lo iré actualizando continuamente hasta acabarlo...
 
+        16/01/2026:
+        - Sigo leyendo documentación oficial de Spring MVC, ya comprendiendo ResponseEntity y Controller
+        Advice para el control de Exceptiones globales. A la par aprendiendo Typescript para luego inte-
+        grarlo en un futuro con Angular
+        - No he estado avanzando código porque la teoría es más importante, cuando llegue el momento de 
+        hacer código de nuevo tendré como tarea:
+                1) Manejo de Excepciones
+                2) Mejorar Controllers y Services con ResponseEntity
+                3) Creación del carrito y la lógica del negocio correspondiente
+
+        
+        13/01/2026:
+        - Estos días he estado leyendo documentación oficial de Spring MVC ya que decidí mejorar mi forma
+        de hacer controllers
+         - He leído:
+                1) DispatcherServlet: https://docs.spring.io/spring-framework/reference/web/webmvc/
+                mvc-servlet.html (Context Hierarchy, Special Bean Types, Web MVC Config, Servlet Config, 
+                Processing, Path Matching, Interception, Exceptions View Resolution. Ahora entiendo
+                lo que puede ofrecer Spring MVC.
+                2) Especificamente Mapping Requests: https://docs.spring.io/spring-framework/reference
+                /web/webmvc/mvc-controller/ann-requestmapping.html donde explican las mejores prácticas
+
+
         11/01/2026:
         - Ya terminado la autorización y autenticación (de manera no refinada) por fin he decidido la di-
         rección de este proyecto, ya que el Spring Security está implementado de manera básica, intentaré
