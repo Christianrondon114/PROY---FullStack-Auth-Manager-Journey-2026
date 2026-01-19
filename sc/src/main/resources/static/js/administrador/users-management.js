@@ -130,7 +130,6 @@ async function showDetail(id) {
         /** @type {{id: number, username: string, roleName: string}} */
         const user = await response.json();
 
-        // 2. Referencias a los elementos del modal
         const viewId = document.getElementById('viewId');
         const username = document.getElementById('viewName');
         const roleName = document.getElementById('viewRole');

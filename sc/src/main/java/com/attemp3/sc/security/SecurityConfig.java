@@ -77,6 +77,27 @@ public class SecurityConfig {
 
                         .requestMatchers("/api/register").permitAll()
 
+        // ------------------ PRODUCTS API SECURITY -----------------------
+
+                        .requestMatchers(HttpMethod.GET, "/api/products/**")
+                        .access((Authentication, context) ->
+                                new AuthorizationDecision(securityService.canRead(Authentication.get())))
+
+                        .requestMatchers(HttpMethod.POST, "/api/products")
+                        .access((Authentication, context) ->
+                                new AuthorizationDecision(securityService.canCreate(Authentication.get())))
+
+                        .requestMatchers(HttpMethod.DELETE, "/api/products/{id}")
+                        .access((Authentication, context) ->
+                                new AuthorizationDecision(securityService.canDelete(Authentication.get())))
+
+                        .requestMatchers(HttpMethod.PUT, "/api/products/{id}")
+                        .access((Authentication, context) ->
+                                new AuthorizationDecision(securityService.canUpdate(Authentication.get())))
+
+
+         // ------------------ USERS API SECURITY -----------------------
+
                         .requestMatchers(HttpMethod.GET, "/api/users/**")
                         .access((Authentication, context) ->
                                 new AuthorizationDecision(securityService.canRead(Authentication.get())))
@@ -112,7 +133,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.ERROR).permitAll()
                         .requestMatchers("/html/myLogin.html", "/favicon.ico").permitAll()
-                        .requestMatchers("/html/administrador/home_admin.html","/html/administrador/usuarios.html").hasAnyRole("ADMIN","MOD")
+                        .requestMatchers("/html/administrador/home_admin.html","/html/administrador/usuarios.html", "html/administrador/productos.html").hasAnyRole("ADMIN","MOD")
                         .anyRequest().authenticated()
                 )
                 .logout(logout -> logout.logoutSuccessUrl("/html/myLogin.html"))
