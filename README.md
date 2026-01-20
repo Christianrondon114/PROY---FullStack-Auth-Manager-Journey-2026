@@ -3,9 +3,9 @@ Primer intento de realizar un proyecto FullStack con Spring Security: reaprendie
 Este proyecto lo iré actualizando continuamente hasta acabarlo...
 
         19/01/2026:
-        - Commit del día, recién creando e integrando la página principal del usuario (USER, GUEST) haciendo
-        uso del bean AuthenticationSuccessHandler del contener de Spring Security para dirigir a páginas 
-        correspondientes según tu role y authorities
+        - Commit del día: recién creando e integrando la interfaz de la página principal del usuario 
+        (USER, GUEST) haciendo uso del bean AuthenticationSuccessHandler del contener de Spring Security
+        para dirigir a páginas correspondientes según tu role y authorities
                         guest/user -> home_user
                         mod/admin -> home_admin
                 Meta:
