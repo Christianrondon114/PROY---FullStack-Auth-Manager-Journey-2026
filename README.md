@@ -2,6 +2,15 @@ Primer intento de realizar un proyecto FullStack con Spring Security: reaprendie
 
 Este proyecto lo iré actualizando continuamente hasta acabarlo...
 
+        18/01/2026:
+        - Hoy quise avanzar código porque cuanto más leo más se me acumula cosas que aplicar, así que...
+        hoy implementé y cree el frontend product management del administrador, con la conexión hacia 
+        el backend y la exposición de sus datos mediante DTO's al front. 
+                Logro:
+                1) Mi Product Controller mejorado con las buenas prácticas de la documentación oficial 
+                de Spring MVC sirve correctamente.
+                
+
         16/01/2026:
         - Sigo leyendo documentación oficial de Spring MVC, ya comprendiendo ResponseEntity y Controller
         Advice para el control de Exceptiones globales. A la par aprendiendo Typescript para luego inte-
