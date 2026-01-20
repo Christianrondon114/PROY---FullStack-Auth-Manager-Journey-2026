@@ -9,12 +9,13 @@ import com.attemp3.sc.dtos.user.response.UserResponse;
 import com.attemp3.sc.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping(path = "/api/users")
 public class UserController {
 
     private final UserService userService;
@@ -23,30 +24,34 @@ public class UserController {
         this.userService = userService;
     }
 
-    // ----------------- CRUD USER -------------------------------------------
+    // -------------------------- CRUD USER -------------------------------------------
 
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
     public List<ListAllUsersResponse> showAllUsers() {
         return userService.showAllUsers();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(path ="/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
     public ReadOneUserResponse readUserById(@PathVariable Long id) {
         return userService.readUserById(id);
     }
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public CreateUserResponse createUser(@RequestBody @Valid CreateUserRequest request) {
         return userService.createUser(request);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUserById(@PathVariable Long id) {
         userService.deleteUserById(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
     public UserResponse updateUser(@PathVariable Long id, @RequestBody @Valid UpdateUserRequest request) {
         return userService.updateUser(id, request);
     }

@@ -30,6 +30,7 @@ import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.ExceptionTranslationFilter;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.context.SecurityContextHolderFilter;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.NullRequestCache;
@@ -57,7 +58,7 @@ public class SecurityConfig {
         RequestCache nullRequestCache = new NullRequestCache();
 
         return http
-                .securityMatcher("/css/**", "/js/**","/html/navbar.html","/html/public/**")
+                .securityMatcher("/css/**", "/js/**", "/favicon.ico", "/images/**")
                 .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
                 .requestCache(cache -> cache
                         .requestCache(nullRequestCache))
@@ -127,13 +128,16 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/html/myLogin.html")
                         .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/html/administrador/home_admin.html", true)
+                        .successHandler(myAuthenticationSuccessHandler())
+                        // .defaultSuccessUrl("/html/administrador/home_admin.html", true)
                         .permitAll()
                 )
                 .authorizeHttpRequests(auth -> auth
                         .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.ERROR).permitAll()
                         .requestMatchers("/html/myLogin.html", "/favicon.ico").permitAll()
-                        .requestMatchers("/html/administrador/home_admin.html","/html/administrador/usuarios.html", "html/administrador/productos.html").hasAnyRole("ADMIN","MOD")
+                        .requestMatchers("/html/public/navbar_user.html", "/html/administrador/navbar_admin.html").permitAll()
+                        .requestMatchers("/html/administrador/**").hasAnyRole("ADMIN","MOD")
+                        .requestMatchers("/html/public/home_user.html").hasAnyRole("GUEST")
                         .anyRequest().authenticated()
                 )
                 .logout(logout -> logout.logoutSuccessUrl("/html/myLogin.html"))
@@ -219,9 +223,30 @@ public class SecurityConfig {
          return new DelegatingPasswordEncoder(idForEncode, encoders);
     }
 
+    // UserDetailsService Bean Instation
     @Bean
     CustomUserDetailsService customUserDetailsService() {
         return new CustomUserDetailsService();
+    }
+
+    // CUSTON FILTER: custom auth success handler by roles
+    @Bean
+    public AuthenticationSuccessHandler myAuthenticationSuccessHandler() {
+        return (request, response, authentication) -> {
+            var authorities = authentication.getAuthorities();
+
+            String redirectUrl = "/html/public/home_user.html";
+
+            for (var authority : authorities) {
+                if (authority.getAuthority().equals("ROLE_ADMIN") ||
+                        authority.getAuthority().equals("ROLE_MOD")) {
+                    redirectUrl = "/html/administrador/home_admin.html";
+                    break;
+                }
+            }
+
+            response.sendRedirect(redirectUrl);
+        };
     }
 
 
