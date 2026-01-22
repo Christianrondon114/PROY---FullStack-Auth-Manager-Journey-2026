@@ -2,6 +2,20 @@ Primer intento de realizar un proyecto FullStack con Spring Security: reaprendie
 
 Este proyecto lo iré actualizando continuamente hasta acabarlo...
 
+        19/01/2026:
+        - Commit del día: recién creando e integrando la interfaz de la página principal del usuario 
+        (USER, GUEST) haciendo uso del bean AuthenticationSuccessHandler del contener de Spring Security
+        para dirigir a páginas correspondientes según tu role y authorities
+                        guest/user -> home_user
+                        mod/admin -> home_admin
+                Meta:
+                1) Crear catálogo con tarjetas funcional para que el usuario vea los productos registrados
+                reflejando lo creado y editado en el Product Management del Administrador.
+                2) Creación de la lógica del Carrito.
+                3) Implementación de la lógica de Pedidos y sus entidades.
+        
+
+        
         18/01/2026:
         - Hoy quise avanzar código porque cuanto más leo más se me acumula cosas que aplicar, así que...
         hoy implementé y cree el frontend product management del administrador, con la conexión hacia 
@@ -52,10 +66,9 @@ Este proyecto lo iré actualizando continuamente hasta acabarlo...
         - Hoy día he integrado la creación de interfaz de registro de usuarios, la lógica de negocio del 
         register habilitado a todos los usuarios sin importar su authentication además de que los nuevos
         usuarios se reflejan en el CRUD de administradores y en la base de datos MySQL.
-        - He leído e integrado:
-                1) No he leído ni integrado nada nuevo, ya tengo entendido el flujo front -> backend con 
-                JavaScript, la lógica de negocio del Registro de usuarios lo logré con conocimiento apren-
-                dido hasta ahora
+        - No he leído ni integrado nada nuevo, ya tengo entendido el flujo front -> backend con 
+        JavaScript, la lógica de negocio del Registro de usuarios lo logré con conocimiento apren-
+        dido hasta ahora
         - Ahora toca hacer:
                 1) Parte técnica: creación y adaptación de la Entidad Authorities en la base de datos para 
                 el sistema
