@@ -1,5 +1,6 @@
 package com.attemp3.sc.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -26,6 +27,10 @@ public class User {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     private Role role;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private ShoppingCart shoppingCart;
 
     public User(@NotBlank(message = "is required") String username, @NotBlank(message = "is required") String password) {
         this.username = username;

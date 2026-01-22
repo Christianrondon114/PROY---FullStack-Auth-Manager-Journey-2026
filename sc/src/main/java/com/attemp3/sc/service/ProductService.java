@@ -2,6 +2,7 @@ package com.attemp3.sc.service;
 
 import com.attemp3.sc.dtos.product.request.CreateProductRequest;
 import com.attemp3.sc.dtos.product.request.UpdateProductRequest;
+import com.attemp3.sc.dtos.product.response.CardProductResponse;
 import com.attemp3.sc.dtos.product.response.ListAllProductsResponse;
 import com.attemp3.sc.dtos.product.response.ReadOneProductResponse;
 import com.attemp3.sc.entities.Product;
@@ -30,6 +31,15 @@ public class ProductService {
         return productList.stream()
                 .map(ProductMapper::toAllProductsResponse)
                 .toList();
+    }
+
+    public List<CardProductResponse> showProductCardStore(){
+        List<Product> productList = productRepository.findAll();
+
+        return productList.stream()
+                .map(ProductMapper::toCardProductResponse)
+                .toList();
+
     }
 
     public Product createProduct(CreateProductRequest request) {

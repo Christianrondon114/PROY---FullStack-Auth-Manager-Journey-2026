@@ -80,6 +80,8 @@ public class SecurityConfig {
 
         // ------------------ PRODUCTS API SECURITY -----------------------
 
+
+
                         .requestMatchers(HttpMethod.GET, "/api/products/**")
                         .access((Authentication, context) ->
                                 new AuthorizationDecision(securityService.canRead(Authentication.get())))
@@ -95,6 +97,13 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/api/products/{id}")
                         .access((Authentication, context) ->
                                 new AuthorizationDecision(securityService.canUpdate(Authentication.get())))
+
+                                .requestMatchers(HttpMethod.GET, "/api/public/products")
+                                .access((Authentication, context) ->
+                                        new AuthorizationDecision(securityService.canReadCards(Authentication.get())))
+
+
+
 
 
          // ------------------ USERS API SECURITY -----------------------

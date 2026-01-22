@@ -22,13 +22,13 @@ public class SecurityTest {
     @WithMockUser(roles = "ADMIN") // Simulamos un Admin
     void deleteUser_AsAdmin_ShouldWork() throws Exception {
         this.mvc.perform(delete("/api/users/17"))
-                .andExpect(status().isOk()); // El admin puede borrar
+                .andExpect(status().isOk());
     }
 
     @Test
     @WithMockUser(roles = "USER") // Simulamos un usuario norma@
     void deleteUser_AsUser_ShouldBeForbidden() throws Exception {
         this.mvc.perform(delete("/api/users/18"))
-                .andExpect(status().isForbidden()); // 403: El usuario NO puede borrar
+                .andExpect(status().isForbidden());
     }
 }

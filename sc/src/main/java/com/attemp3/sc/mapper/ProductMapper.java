@@ -1,6 +1,7 @@
 package com.attemp3.sc.mapper;
 
 import com.attemp3.sc.dtos.product.request.CreateProductRequest;
+import com.attemp3.sc.dtos.product.response.CardProductResponse;
 import com.attemp3.sc.dtos.product.response.ListAllProductsResponse;
 import com.attemp3.sc.dtos.product.response.ReadOneProductResponse;
 import com.attemp3.sc.dtos.user.response.ReadOneUserResponse;
@@ -12,6 +13,11 @@ public class ProductMapper {
     // ---toAllProductsResponse ---
     public static ListAllProductsResponse toAllProductsResponse(Product product) {
         return new ListAllProductsResponse(product.getProductId(), product.getName(), product.getPrice(),product.getStock(),product.isAvailable());
+    }
+
+    // ---toCardProductResponse ---
+    public static CardProductResponse toCardProductResponse(Product product) {
+        return new CardProductResponse(product.getName(), product.getDescription(), product.getPrice(),product.getDiscount(), product.getImageUrl());
     }
 
     // --- CreateProductRequest ---

@@ -21,6 +21,13 @@ public class SecurityService {
                 && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("read"));
     }
 
+    public boolean canReadCards(Authentication auth){
+        var authorities = roleHierarchy.getReachableGrantedAuthorities(auth.getAuthorities());
+
+        return authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_GUEST"))
+                && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("read"));
+    }
+
     public boolean canCreate(Authentication auth){
         var authorities = roleHierarchy.getReachableGrantedAuthorities(auth.getAuthorities());
 
