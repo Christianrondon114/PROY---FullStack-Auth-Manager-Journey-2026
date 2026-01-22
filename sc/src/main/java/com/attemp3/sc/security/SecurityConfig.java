@@ -102,10 +102,6 @@ public class SecurityConfig {
                                 .access((Authentication, context) ->
                                         new AuthorizationDecision(securityService.canReadCards(Authentication.get())))
 
-
-
-
-
          // ------------------ USERS API SECURITY -----------------------
 
                         .requestMatchers(HttpMethod.GET, "/api/users/**")
