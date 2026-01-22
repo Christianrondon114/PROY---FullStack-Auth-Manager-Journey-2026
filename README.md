@@ -5,6 +5,8 @@ Este proyecto lo iré actualizando continuamente hasta acabarlo...
 Backend: Java 17+, Spring Boot 3, Spring Security (JDBC Auth), Hibernate/JPA.
 Frontend: Vanilla JS, HTML5, CSS3 (Próximamente TS/Angular).
 DB: MySQL.
+
+
         22/01/2026:
         - Probando el Servicio del Carrito, me di cuenta que mis métodos están muy mal y no estoy aprove-
         chando el Spring Security :P ... Cualquiera podría poner IdUser?=5 (ID's de diferentes usuarios) 
@@ -16,7 +18,6 @@ DB: MySQL.
                 servlet/authentication/architecture.html
                 - Spring MVC Integration: https://docs.spring.io/spring-security/reference/servlet/
                 integrations/mvc.html#mvc-authentication-principal
-
 
 
         20/01/2026 - 21/01/2026: 
