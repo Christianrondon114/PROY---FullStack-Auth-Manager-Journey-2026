@@ -12,8 +12,7 @@ import com.attemp3.sc.repository.CartItemRepository;
 import com.attemp3.sc.repository.ProductRepository;
 import com.attemp3.sc.repository.ShoppingCartRepository;
 import com.attemp3.sc.repository.UserRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -37,14 +36,28 @@ public class ShoppingCartService {
         this.cartItemRepository = cartItemRepository;
     }
 
-    public AddToCartResponse addToCart(AddToCartRequest request) {
-        User user = userRepository.findById(request.getUserId())
-                .orElseThrow(() -> new RuntimeException("User with" + request.getUserId() + "doesn't exists"));
+    public ShoppingCartResponse showAllItems(UserDetails userDetails){
+        User user = userRepository.findByUsername(userDetails.getUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return shoppingCartRepository.findByUser_Id(user.getId())
+                .map(ShoppingCartMapper::toShoppingCartResponse)
+                .orElseGet(() -> {
+                    ShoppingCartResponse empty = new ShoppingCartResponse();
+                    empty.setListItems(new ArrayList<>());
+                    empty.setTotalPrice(0.0);
+                    return empty;
+                });
+    }
+
+    public AddToCartResponse addToCart(UserDetails userDetails, AddToCartRequest request) {
+        User user = userRepository.findByUsername(userDetails.getUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
         Product product = productRepository.findById(request.getProductId())
                 .orElseThrow(() -> new RuntimeException("Product with" + request.getProductId() + "doesn't exists"));
 
-        ShoppingCart sc = shoppingCartRepository.findByUser_Id(request.getUserId()).
+        ShoppingCart sc = shoppingCartRepository.findByUser_Id(user.getId()).
                 orElseGet(() -> createShoppingCart(user));
 
         CartItem item = CartItem.builder()
@@ -61,18 +74,24 @@ public class ShoppingCartService {
         return ShoppingCartMapper.toResponse(savedItem);
     }
 
-    private void clearAllCart(Long id) {
-        ShoppingCart cart = shoppingCartRepository.findByUser_Id(id)
+    public void clearAllCart(UserDetails userDetails) {
+        User user = userRepository.findByUsername(userDetails.getUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        ShoppingCart cart = shoppingCartRepository.findByUser_Id(user.getId())
                 .orElseThrow(() -> new RuntimeException("Shopping Cart not found"));
         cart.getListItems().clear();
         updateTotalPrice(cart);
         shoppingCartRepository.save(cart);
-
     }
 
-    private void clearItemCart(Long userId, Long cartItemId) {
-        ShoppingCart cart = shoppingCartRepository.findByUser_Id(userId)
-                .orElseThrow(() -> new RuntimeException("Carrito no encontrado"));
+    public void clearItemCart(UserDetails userDetails, Long cartItemId) {
+        User user = userRepository.findByUsername(userDetails.getUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        ShoppingCart cart = shoppingCartRepository.findByUser_Id(user.getId())
+                .orElseThrow(() -> new RuntimeException("Shopping Cart not founded"));
+
         cart.getListItems().
                 removeIf(item -> item.getId().equals(cartItemId));
         updateTotalPrice(cart);
@@ -86,7 +105,7 @@ public class ShoppingCartService {
         return shoppingCartRepository.save(newCart);
     }
 
-    public void updateTotalPrice(ShoppingCart cart) {
+    private void updateTotalPrice(ShoppingCart cart) {
         double total = cart.getListItems()
                 .stream()
                 .mapToDouble(CartItem::getSubtotal)

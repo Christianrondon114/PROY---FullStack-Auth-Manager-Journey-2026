@@ -138,7 +138,6 @@ public class SecurityConfig {
                         .loginPage("/html/myLogin.html")
                         .loginProcessingUrl("/login")
                         .successHandler(myAuthenticationSuccessHandler())
-                        // .defaultSuccessUrl("/html/administrador/home_admin.html", true)
                         .permitAll()
                 )
                 .authorizeHttpRequests(auth -> auth
@@ -146,7 +145,7 @@ public class SecurityConfig {
                         .requestMatchers("/html/myLogin.html", "/favicon.ico").permitAll()
                         .requestMatchers("/html/public/navbar_user.html", "/html/administrador/navbar_admin.html").permitAll()
                         .requestMatchers("/html/administrador/**").hasAnyRole("ADMIN","MOD")
-                        .requestMatchers("/html/public/home_user.html").hasAnyRole("GUEST")
+                        .requestMatchers("/html/public/**").hasAnyRole("GUEST")
                         .anyRequest().authenticated()
                 )
                 .logout(logout -> logout.logoutSuccessUrl("/html/myLogin.html"))

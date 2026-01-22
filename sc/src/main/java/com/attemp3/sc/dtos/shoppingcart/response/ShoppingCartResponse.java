@@ -4,12 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class ShoppingCartResponse {
-    private List<AddToCartResponse> listItems;
+    private List<AddToCartResponse> listItems = new ArrayList<>();
     private double totalPrice;
+    private int totalItems;
 }
