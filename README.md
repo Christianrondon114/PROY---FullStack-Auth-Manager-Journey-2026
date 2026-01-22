@@ -2,6 +2,21 @@ Primer intento de realizar un proyecto FullStack con Spring Security: reaprendie
 
 Este proyecto lo iré actualizando continuamente hasta acabarlo...
 
+        20/01/2025 - 21/01/2025: 
+        - Frontend: Creación de tarjetas funcionales conectadas al Product Management del Administrador
+        - Backend: Creación del servicio del Carrito, carrito para usuario
+        que futuramente se creará al intentar meter un producto al carrito. Eliminación de Items del 
+        carrito mediante id del CartItem. Eliminación de todos los items del Carrito de Compras. 
+                Toca hacer:
+                - Controlador del Carrito. 
+                - Implementar respuestas ResponseEntity
+                - Armar frontend carrito de compras para los usuarios y conectarlo al backend.
+                Próximamente:
+                - Tocará manejar excepciones globales personalizadas.
+                - Creación de los pedidos y sus respectivo manegement en el administrador
+                - Seguir leyendo la arquitectura y recomendaciones de Spring MVC.
+                
+        
         19/01/2026:
         - Commit del día: recién creando e integrando la interfaz de la página principal del usuario 
         (USER, GUEST) haciendo uso del bean AuthenticationSuccessHandler del contener de Spring Security
