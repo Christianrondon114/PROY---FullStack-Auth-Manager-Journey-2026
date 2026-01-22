@@ -2,6 +2,10 @@ Primer intento de realizar un proyecto FullStack con Spring Security: reaprendie
 
 Este proyecto lo iré actualizando continuamente hasta acabarlo...
 
+Backend: Java 17+, Spring Boot 3, Spring Security (JDBC Auth), Hibernate/JPA.
+Frontend: Vanilla JS, HTML5, CSS3 (Próximamente TS/Angular).
+DB: MySQL.
+
         20/01/2025 - 21/01/2025: 
         - Frontend: Creación de tarjetas funcionales conectadas al Product Management del Administrador
         - Backend: Creación del servicio del Carrito, carrito para usuario
