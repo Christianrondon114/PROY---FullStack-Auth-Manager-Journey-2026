@@ -6,7 +6,7 @@ Backend: Java 17+, Spring Boot 3, Spring Security (JDBC Auth), Hibernate/JPA.
 Frontend: Vanilla JS, HTML5, CSS3 (Próximamente TS/Angular).
 DB: MySQL.
 
-        20/01/2025 - 21/01/2025: 
+        20/01/2026 - 21/01/2026: 
         - Frontend: Creación de tarjetas funcionales conectadas al Product Management del Administrador
         - Backend: Creación del servicio del Carrito, carrito para usuario
         que futuramente se creará al intentar meter un producto al carrito. Eliminación de Items del 
