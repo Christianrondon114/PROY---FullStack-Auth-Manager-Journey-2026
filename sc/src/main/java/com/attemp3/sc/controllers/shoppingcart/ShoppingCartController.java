@@ -34,7 +34,10 @@ public class ShoppingCartController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AddToCartResponse> addToCart(@AuthenticationPrincipal UserDetails userDetails, @RequestBody AddToCartRequest request) {
+
+
         AddToCartResponse response = shoppingCartService.addToCart(userDetails, request);
+        System.out.println("Añadiendo producto: " + request.getProductId() + " para el usuario: " + userDetails.getUsername());
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
@@ -49,5 +52,7 @@ public class ShoppingCartController {
         shoppingCartService.clearAllCart(userDetails);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+
 
 }

@@ -40,6 +40,9 @@ public class CustomUserDetailsService implements UserDetailsService {
             authorities.add(new SimpleGrantedAuthority("write"));
         } else {
             authorities.add(new SimpleGrantedAuthority("read"));
+            authorities.add(new SimpleGrantedAuthority("shopping-cart_read"));
+            authorities.add(new SimpleGrantedAuthority("cart_add"));
+            authorities.add(new SimpleGrantedAuthority("cart_delete"));
         }
 
         return org.springframework.security.core.userdetails.User.builder()

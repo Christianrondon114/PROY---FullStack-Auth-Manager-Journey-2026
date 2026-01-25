@@ -51,6 +51,11 @@ public class ShoppingCartService {
     }
 
     public AddToCartResponse addToCart(UserDetails userDetails, AddToCartRequest request) {
+        // DEBUG:
+        System.out.println("DEBUG - ID Producto recibido: " + request.getProductId());
+        System.out.println("DEBUG - Username recibido: " + userDetails.getUsername());
+
+        // Si este ID es null, aquí es donde explota findById
         User user = userRepository.findByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 

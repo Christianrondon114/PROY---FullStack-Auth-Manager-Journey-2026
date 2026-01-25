@@ -76,12 +76,29 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.ERROR).permitAll()
 
+                        // ------------------ REGISTER API SECURITY -----------------------
                         .requestMatchers("/api/register").permitAll()
 
-        // ------------------ PRODUCTS API SECURITY -----------------------
+
+                        // ------------------ SHOPPING CART API SECURITY -----------------------
+                        .requestMatchers(HttpMethod.GET, "/api/shopping-cart/my-cart")
+                        .access((Authentication, context) ->
+                                new AuthorizationDecision(securityService.canReadShoppingCart(Authentication.get())))
+
+                        .requestMatchers(HttpMethod.POST, "/api/shopping-cart")
+                        .access((Authentication, context) ->
+                                new AuthorizationDecision(securityService.canAddToCart(Authentication.get())))
+
+                        .requestMatchers(HttpMethod.DELETE, "/api/shopping-cart/clear-item")
+                        .access((Authentication, context) ->
+                                new AuthorizationDecision(securityService.canClearItemCart(Authentication.get())))
+
+                        .requestMatchers(HttpMethod.DELETE, "/api/shopping-cart/clear-all")
+                        .access((Authentication, context) ->
+                                new AuthorizationDecision(securityService.canClearAllCart(Authentication.get())))
 
 
-
+                        // ------------------ PRODUCTS API SECURITY -----------------------
                         .requestMatchers(HttpMethod.GET, "/api/products/**")
                         .access((Authentication, context) ->
                                 new AuthorizationDecision(securityService.canRead(Authentication.get())))
@@ -98,12 +115,12 @@ public class SecurityConfig {
                         .access((Authentication, context) ->
                                 new AuthorizationDecision(securityService.canUpdate(Authentication.get())))
 
-                                .requestMatchers(HttpMethod.GET, "/api/public/products")
-                                .access((Authentication, context) ->
-                                        new AuthorizationDecision(securityService.canReadCards(Authentication.get())))
+                        .requestMatchers(HttpMethod.GET, "/api/public/products")
+                        .access((Authentication, context) ->
+                                new AuthorizationDecision(securityService.canReadCards(Authentication.get())))
 
-         // ------------------ USERS API SECURITY -----------------------
 
+                        // ------------------ USERS API SECURITY -----------------------
                         .requestMatchers(HttpMethod.GET, "/api/users/**")
                         .access((Authentication, context) ->
                                 new AuthorizationDecision(securityService.canRead(Authentication.get())))
@@ -140,7 +157,7 @@ public class SecurityConfig {
                         .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.ERROR).permitAll()
                         .requestMatchers("/html/myLogin.html", "/favicon.ico").permitAll()
                         .requestMatchers("/html/public/navbar_user.html", "/html/administrador/navbar_admin.html").permitAll()
-                        .requestMatchers("/html/administrador/**").hasAnyRole("ADMIN","MOD")
+                        .requestMatchers("/html/administrador/**").hasAnyRole("ADMIN", "MOD")
                         .requestMatchers("/html/public/**").hasAnyRole("GUEST")
                         .anyRequest().authenticated()
                 )
@@ -210,7 +227,7 @@ public class SecurityConfig {
      */
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         String idForEncode = "bcrypt";
         Map<String, PasswordEncoder> encoders = new HashMap<>();
 
@@ -224,7 +241,7 @@ public class SecurityConfig {
         encoders.put("argon2@SpringSecurity_v5_8", Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8());
         encoders.put("sha256", new StandardPasswordEncoder());
 
-         return new DelegatingPasswordEncoder(idForEncode, encoders);
+        return new DelegatingPasswordEncoder(idForEncode, encoders);
     }
 
     // UserDetailsService Bean Instation

@@ -17,7 +17,7 @@ public class ProductMapper {
 
     // ---toCardProductResponse ---
     public static CardProductResponse toCardProductResponse(Product product) {
-        return new CardProductResponse(product.getName(), product.getDescription(), product.getPrice(),product.getDiscount(), product.getImageUrl());
+        return new CardProductResponse(product.getProductId(), product.getName(), product.getDescription(), product.getPrice(),product.getDiscount(), product.getImageUrl());
     }
 
     // --- CreateProductRequest ---

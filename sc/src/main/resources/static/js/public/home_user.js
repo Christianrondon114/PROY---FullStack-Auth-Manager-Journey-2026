@@ -20,7 +20,9 @@ async function loadProducts() {
                             <p class="card-text">$${product.price}</p> 
                             <p class="card-text">${product.discount}% Discount!</p> 
                             
-                            <button class="btn btn-primary">Comprar</button>
+                            <button class="btn btn-primary" onclick="addToCart(${product.idProduct}, 1)">
+                    Añadir al carrito
+                </button>
                         </div>
                     </div>
                 </div>

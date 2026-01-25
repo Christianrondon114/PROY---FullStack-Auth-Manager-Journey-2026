@@ -142,8 +142,6 @@ async function showDetail(id) {
             const modalElement = document.getElementById('userDetailModal');
             const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
             modal.show();
-        } else {
-            console.error("Error: Algunos elementos del modal no se encontraron en el DOM.");
         }
 
     } catch (error) {

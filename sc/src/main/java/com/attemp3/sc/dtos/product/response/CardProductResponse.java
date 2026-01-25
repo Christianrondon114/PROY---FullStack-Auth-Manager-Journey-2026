@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class CardProductResponse {
+    private Long idProduct;
     private String name;
     private String description;
     private double price;

@@ -28,6 +28,33 @@ public class SecurityService {
                 && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("read"));
     }
 
+    public boolean canReadShoppingCart(Authentication auth){
+        var authorities = roleHierarchy.getReachableGrantedAuthorities(auth.getAuthorities());
+
+        return authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_GUEST"))
+                && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("shopping-cart_read"));
+    }
+
+    public boolean canAddToCart(Authentication auth){
+        var authorities = roleHierarchy.getReachableGrantedAuthorities(auth.getAuthorities());
+
+        return authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_GUEST"))
+                && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("cart_add"));
+    }
+
+    public boolean canClearItemCart(Authentication auth){
+        var authorities = roleHierarchy.getReachableGrantedAuthorities(auth.getAuthorities());
+
+        return authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_GUEST"))
+                && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("cart_delete"));
+    }
+    public boolean canClearAllCart(Authentication auth){
+        var authorities = roleHierarchy.getReachableGrantedAuthorities(auth.getAuthorities());
+
+        return authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_GUEST"))
+                && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("cart_delete"));
+    }
+
     public boolean canCreate(Authentication auth){
         var authorities = roleHierarchy.getReachableGrantedAuthorities(auth.getAuthorities());
 
