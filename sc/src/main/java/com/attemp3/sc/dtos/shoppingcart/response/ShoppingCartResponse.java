@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 public class ShoppingCartResponse {
-    private List<AddToCartResponse> listItems = new ArrayList<>();
+    private List<CartItemResponse> listItems = new ArrayList<>();
     private double totalPrice;
     private int totalItems;
 }

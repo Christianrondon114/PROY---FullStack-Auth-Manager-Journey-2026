@@ -1,7 +1,7 @@
 package com.attemp3.sc.service;
 
 import com.attemp3.sc.dtos.shoppingcart.response.AddToCartRequest;
-import com.attemp3.sc.dtos.shoppingcart.response.AddToCartResponse;
+import com.attemp3.sc.dtos.shoppingcart.response.CartItemResponse;
 import com.attemp3.sc.dtos.shoppingcart.response.ShoppingCartResponse;
 import com.attemp3.sc.entities.CartItem;
 import com.attemp3.sc.entities.Product;
@@ -50,12 +50,7 @@ public class ShoppingCartService {
                 });
     }
 
-    public AddToCartResponse addToCart(UserDetails userDetails, AddToCartRequest request) {
-        // DEBUG:
-        System.out.println("DEBUG - ID Producto recibido: " + request.getProductId());
-        System.out.println("DEBUG - Username recibido: " + userDetails.getUsername());
-
-        // Si este ID es null, aquí es donde explota findById
+    public ShoppingCartResponse addToCart(UserDetails userDetails, AddToCartRequest request) {
         User user = userRepository.findByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -72,11 +67,12 @@ public class ShoppingCartService {
                 .subtotal(request.getQuantity() * product.getPrice())
                 .build();
 
-        CartItem savedItem = cartItemRepository.save(item);
-        updateTotalPrice(sc);
-        shoppingCartRepository.save(sc);
+        cartItemRepository.save(item);
 
-        return ShoppingCartMapper.toResponse(savedItem);
+        updateTotalPrice(sc);
+        ShoppingCart updatedCart = shoppingCartRepository.save(sc);
+
+        return ShoppingCartMapper.toShoppingCartResponse(updatedCart);
     }
 
     public void clearAllCart(UserDetails userDetails) {

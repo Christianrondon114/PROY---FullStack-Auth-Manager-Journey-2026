@@ -4,10 +4,14 @@
     align-items: center;
     background: white;
     padding: 20px;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    transition: transform 0.2s;
+    border: 1px solid #eee;
+}
+
+#cart-items-container {
+    padding-right: 50px;
 }
 
 .cart-item:hover {
@@ -73,21 +77,11 @@
     font-weight: 600;
 }
 
-.btn-delete {
-    background: transparent;
-    border: none;
-    color: #ff7675;
-    cursor: pointer;
-    font-size: 0.9rem;
-}
-
 .btn-delete:hover { text-decoration: underline; }
 
-/* Precio total del item */
-.item-subtotal {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #2d3436;
-    min-width: 100px;
-    text-align: right;
+.sticky-top {
+    top: 167px;
+    z-index: 10;
+    align-self: flex-start; /* Evita que se estire verticalmente si la fila crece */
+
 }

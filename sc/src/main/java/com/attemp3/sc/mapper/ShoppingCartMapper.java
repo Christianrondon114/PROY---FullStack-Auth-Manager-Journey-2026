@@ -1,6 +1,6 @@
 package com.attemp3.sc.mapper;
 
-import com.attemp3.sc.dtos.shoppingcart.response.AddToCartResponse;
+import com.attemp3.sc.dtos.shoppingcart.response.CartItemResponse;
 import com.attemp3.sc.dtos.shoppingcart.response.ShoppingCartResponse;
 import com.attemp3.sc.entities.CartItem;
 import com.attemp3.sc.entities.ShoppingCart;
@@ -10,12 +10,12 @@ import java.util.stream.Collectors;
 
 public class ShoppingCartMapper {
 
-    public static AddToCartResponse toResponse(CartItem savedItem) {
+    public static CartItemResponse toResponse(CartItem savedItem) {
         if (savedItem == null) return null;
 
-        AddToCartResponse response = new AddToCartResponse();
+        CartItemResponse response = new CartItemResponse();
 
-        response.setItemId(savedItem.getId());
+        response.setCartItemId(savedItem.getId());
         response.setProductName(savedItem.getProduct().getName());
         response.setImageUrl(savedItem.getProduct().getImageUrl());
         response.setQuantity(savedItem.getQuantity());
@@ -32,7 +32,7 @@ public class ShoppingCartMapper {
 
         response.setTotalPrice(cart.getTotalPrice());
 
-        List<AddToCartResponse> items = cart.getListItems()
+        List<CartItemResponse> items = cart.getListItems()
                 .stream()
                 .map(ShoppingCartMapper::toResponse)
                 .collect(Collectors.toList());
