@@ -7,6 +7,19 @@ Frontend: Vanilla JS, HTML5, CSS3 (Próximamente TS/Angular).
 DB: MySQL.
 
 
+        24/01/2026:
+        - Hoy implementé en un 60% lo que es la interfaz de carrito de compras de usuarios, manejando los
+        permisos de quién puede entrar (todos deberían pero aún así tengo que configurar en Spring Security)
+        aún no lo fixeo (por ahora solo es posible los users y los guest). Ya es posible agregar agregar 
+        productos al carrito de compras y se exponen de manera correcta en el carrito de compras en contene-
+        dores de ItemCarts.
+                Debería para la siguiente actualización:
+                1) Terminar la lógica de carrito de compras
+                2) Mejorar la interfaz del carrito de compras para agregar a un costado cómo va
+                el estado de la compra (total, cuantos productos hay, etc).
+                3) Seguir leyendo Spring MVC.
+
+
         22/01/2026:
         - Probando el Servicio del Carrito, me di cuenta que mis métodos están muy mal y no estoy aprove-
         chando el Spring Security :P ... Cualquiera podría poner IdUser?=5 (ID's de diferentes usuarios) 
