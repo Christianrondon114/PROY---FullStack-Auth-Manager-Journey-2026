@@ -7,12 +7,19 @@ Frontend: Vanilla JS, HTML5, CSS3 (Próximamente TS/Angular).
 DB: MySQL.
 
 
+        25/01/2026:
+        - Seguí construyendo el carrito de compras, ya está en un 90% terminado tanto backend y frontend,
+        tan solo falta hacer funcional el panel de resumen del carrito de compras.
+        - Ya falta muy poco para terminar este módulo mientras tanto sigo leyendo y resolviendo ejercicios 
+        lógicos de TypeScript para acomodarme a la sintaxis.
+        
+
         24/01/2026:
         - Hoy implementé en un 60% lo que es la interfaz de carrito de compras de usuarios, manejando los
         permisos de quién puede entrar (todos deberían pero aún así tengo que configurar en Spring Security)
-        aún no lo fixeo (por ahora solo es posible los users y los guest). Ya es posible agregar agregar 
-        productos al carrito de compras y se exponen de manera correcta en el carrito de compras en contene-
-        dores de ItemCarts.
+        aún no lo fixeo (por ahora solo es posible los users y los guest). Ya es posible agregar productos 
+        al carrito de compras y se exponen de manera correcta en el carrito de compras en contenedores de 
+        ItemCarts.
                 Debería para la siguiente actualización:
                 1) Terminar la lógica de carrito de compras
                 2) Mejorar la interfaz del carrito de compras para agregar a un costado cómo va
